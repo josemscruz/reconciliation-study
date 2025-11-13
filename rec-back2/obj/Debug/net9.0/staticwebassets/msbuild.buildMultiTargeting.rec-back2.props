@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="../build/rec-back2.props" />
+</Project>
