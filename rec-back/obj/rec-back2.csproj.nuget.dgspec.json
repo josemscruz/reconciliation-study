@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/josecruz/Documents/code/rec-back2/rec-back2.csproj": {}
+    "/Users/josecruz/Documents/code/reconciliation-study/rec-back/rec-back2.csproj": {}
   },
   "projects": {
-    "/Users/josecruz/Documents/code/rec-back2/rec-back2.csproj": {
+    "/Users/josecruz/Documents/code/reconciliation-study/rec-back/rec-back2.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/josecruz/Documents/code/rec-back2/rec-back2.csproj",
+        "projectUniqueName": "/Users/josecruz/Documents/code/reconciliation-study/rec-back/rec-back2.csproj",
         "projectName": "rec-back2",
-        "projectPath": "/Users/josecruz/Documents/code/rec-back2/rec-back2.csproj",
+        "projectPath": "/Users/josecruz/Documents/code/reconciliation-study/rec-back/rec-back2.csproj",
         "packagesPath": "/Users/josecruz/.nuget/packages/",
-        "outputPath": "/Users/josecruz/Documents/code/rec-back2/obj/",
+        "outputPath": "/Users/josecruz/Documents/code/reconciliation-study/rec-back/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/josecruz/.nuget/NuGet/NuGet.Config"
