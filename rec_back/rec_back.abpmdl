@@ -1,0 +1,87 @@
+{
+  "template": "app",
+  "imports": {
+    "Volo.Abp.BasicTheme": {
+      "version": "9.3.6",
+      "isInstalled": true
+    },
+    "Volo.Abp.Account": {
+      "version": "9.3.6",
+      "isInstalled": true,
+      "creationTime": "11/14/2025 22:25:45 +00:00"
+    },
+    "Volo.Abp.OpenIddict": {
+      "version": "9.3.6",
+      "isInstalled": true,
+      "creationTime": "11/14/2025 22:25:45 +00:00"
+    },
+    "Volo.Abp.Identity": {
+      "version": "9.3.6",
+      "isInstalled": true,
+      "creationTime": "11/14/2025 22:25:45 +00:00"
+    },
+    "Volo.Abp.TenantManagement": {
+      "version": "9.3.6",
+      "isInstalled": true,
+      "creationTime": "11/14/2025 22:25:45 +00:00"
+    },
+    "Volo.Abp.SettingManagement": {
+      "version": "9.3.6",
+      "isInstalled": true,
+      "creationTime": "11/14/2025 22:25:45 +00:00"
+    },
+    "Volo.Abp.PermissionManagement": {
+      "version": "9.3.6",
+      "isInstalled": true,
+      "creationTime": "11/14/2025 22:25:45 +00:00"
+    },
+    "Volo.Abp.FeatureManagement": {
+      "version": "9.3.6",
+      "isInstalled": true,
+      "creationTime": "11/14/2025 22:25:45 +00:00"
+    }
+  },
+  "folders": {
+    "items": {
+      "src": {}
+    }
+  },
+  "packages": {
+    "rec_back.Application": {
+      "path": "src/rec_back.Application/rec_back.Application.abppkg",
+      "folder": "src"
+    },
+    "rec_back.Domain.Shared": {
+      "path": "src/rec_back.Domain.Shared/rec_back.Domain.Shared.abppkg",
+      "folder": "src"
+    },
+    "rec_back.Application.Contracts": {
+      "path": "src/rec_back.Application.Contracts/rec_back.Application.Contracts.abppkg",
+      "folder": "src"
+    },
+    "rec_back.HttpApi": {
+      "path": "src/rec_back.HttpApi/rec_back.HttpApi.abppkg",
+      "folder": "src"
+    },
+    "rec_back.HttpApi.Client": {
+      "path": "src/rec_back.HttpApi.Client/rec_back.HttpApi.Client.abppkg",
+      "folder": "src"
+    },
+    "rec_back.EntityFrameworkCore": {
+      "path": "src/rec_back.EntityFrameworkCore/rec_back.EntityFrameworkCore.abppkg",
+      "folder": "src"
+    },
+    "rec_back.DbMigrator": {
+      "path": "src/rec_back.DbMigrator/rec_back.DbMigrator.abppkg",
+      "folder": "src"
+    },
+    "rec_back.HttpApi.Host": {
+      "path": "src/rec_back.HttpApi.Host/rec_back.HttpApi.Host.abppkg",
+      "folder": "src"
+    },
+    "rec_back.Domain": {
+      "path": "src/rec_back.Domain/rec_back.Domain.abppkg",
+      "folder": "src"
+    }
+  }
+}

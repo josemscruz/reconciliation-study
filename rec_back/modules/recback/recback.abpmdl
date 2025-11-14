@@ -1,0 +1,41 @@
+{
+  "folders": {
+    "items": {
+      "src": {}
+    }
+  },
+  "packages": {
+    "recback.Domain": {
+      "path": "src/recback.Domain/recback.Domain.abppkg",
+      "folder": "src"
+    },
+    "recback.Application.Contracts": {
+      "path": "src/recback.Application.Contracts/recback.Application.Contracts.abppkg",
+      "folder": "src"
+    },
+    "recback.Application": {
+      "path": "src/recback.Application/recback.Application.abppkg",
+      "folder": "src"
+    },
+    "recback.EntityFrameworkCore": {
+      "path": "src/recback.EntityFrameworkCore/recback.EntityFrameworkCore.abppkg",
+      "folder": "src"
+    },
+    "recback.HttpApi": {
+      "path": "src/recback.HttpApi/recback.HttpApi.abppkg",
+      "folder": "src"
+    },
+    "recback.HttpApi.Client": {
+      "path": "src/recback.HttpApi.Client/recback.HttpApi.Client.abppkg",
+      "folder": "src"
+    },
+    "recback.Domain.Shared": {
+      "path": "src/recback.Domain.Shared/recback.Domain.Shared.abppkg",
+      "folder": "src"
+    },
+    "recback.Installer": {
+       "path": "src/recback.Installer/recback.Installer.abppkg",
+       "folder": "src"
+    }
+  }
+}
