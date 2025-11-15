@@ -1,56 +1,52 @@
-﻿# rec_back
+﻿# Reconciliation App
 
-## About this solution
+A reconciliation application built with ABP Framework for managing accounts and transactions.
 
-This is a layered startup solution based on [Domain Driven Design (DDD)](https://abp.io/docs/latest/framework/architecture/domain-driven-design) practises. All the fundamental ABP modules are already installed. Check the [Application Startup Template](https://abp.io/docs/latest/solution-templates/layered-web-application) documentation for more info.
+## Prerequisites
 
-### Pre-requirements
+-   [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)
+-   [PostgreSQL](https://www.postgresql.org/download/)
 
-* [.NET9.0+ SDK](https://dotnet.microsoft.com/download/dotnet)
-* [Node v18 or 20](https://nodejs.org/en)
+## Setup Instructions
 
-### Configurations
-
-The solution comes with a default configuration that works out of the box. However, you may consider to change the following configuration before running your solution:
-
-
-### Before running the application
-
-* Run `abp install-libs` command on your solution folder to install client-side package dependencies. This step is automatically done when you create a new solution, if you didn't especially disabled it. However, you should run it yourself if you have first cloned this solution from your source control, or added a new client-side package dependency to your solution.
-* Run `rec_back.DbMigrator` to create the initial database. This step is also automatically done when you create a new solution, if you didn't especially disabled it. This should be done in the first run. It is also needed if a new database migration is added to the solution later.
-
-#### Generating a Signing Certificate
-
-In the production environment, you need to use a production signing certificate. ABP Framework sets up signing and encryption certificates in your application and expects an `openiddict.pfx` file in your application.
-
-To generate a signing certificate, you can use the following command:
+### 1. Clone the Repository
 
 ```bash
-dotnet dev-certs https -v -ep openiddict.pfx -p 4717ffe8-9656-4d49-abab-57bb98ea5f00
+git clone <https://github.com/josemscruz/reconciliation-study>
 ```
 
-> `4717ffe8-9656-4d49-abab-57bb98ea5f00` is the password of the certificate, you can change it to any password you want.
+### 2. Configure Database Connection
 
-It is recommended to use **two** RSA certificates, distinct from the certificate(s) used for HTTPS: one for encryption, one for signing.
+Open `appsettings.json` in rec_back.HttpApi.Host and update the connection string:
 
-For more information, please refer to: [OpenIddict Certificate Configuration](https://documentation.openiddict.com/configuration/encryption-and-signing-credentials.html#registering-a-certificate-recommended-for-production-ready-scenarios)
+```json
+"ConnectionStrings": {
+  "Default": "Host=localhost;Database=ReconciliationDb;Username=postgres;Password=yourpassword"
+}
+```
 
-> Also, see the [Configuring OpenIddict](https://abp.io/docs/latest/Deployment/Configuring-OpenIddict#production-environment) documentation for more information.
+### 3. Install EF Core Tools (if not already installed)
 
-### Solution structure
+```bash
+dotnet tool install --global dotnet-ef
+```
 
-This is a layered monolith application that consists of the following applications:
+### 4. Apply Database Migrations
 
-* `rec_back.DbMigrator`: A console application which applies the migrations and also seeds the initial data. It is useful on development as well as on production environment.
+Navigate to rec_back.EntityFrameworkCore project directory:
 
+```bash
+cd src/rec_back.EntityFrameworkCore
+dotnet ef database update
+```
 
-## Deploying the application
+### 5. Run the Application
 
-Deploying an ABP application follows the same process as deploying any .NET or ASP.NET Core application. However, there are important considerations to keep in mind. For detailed guidance, refer to ABP's [deployment documentation](https://abp.io/docs/latest/Deployment/Index).
+Navigate back to rec_back.HttpApi.Host:
 
-### Additional resources
+```bash
+cd ../rec_back.HttpApi.Host
+dotnet run
+```
 
-You can see the following resources to learn more about your solution and the ABP Framework:
-
-* [Web Application Development Tutorial](https://abp.io/docs/latest/tutorials/book-store/part-1)
-* [Application Startup Template](https://abp.io/docs/latest/startup-templates/application/index)
+The application will be available at `http://localhost:44317`.

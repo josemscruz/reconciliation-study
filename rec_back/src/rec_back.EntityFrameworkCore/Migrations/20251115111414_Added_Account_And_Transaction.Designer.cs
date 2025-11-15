@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Volo.Abp.EntityFrameworkCore;
@@ -12,9 +13,11 @@ using rec_back.EntityFrameworkCore;
 namespace rec_back.Migrations
 {
     [DbContext(typeof(rec_backDbContext))]
-    partial class rec_backDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251115111414_Added_Account_And_Transaction")]
+    partial class Added_Account_And_Transaction
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

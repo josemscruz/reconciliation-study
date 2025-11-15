@@ -1,13 +1,12 @@
 using System;
-using Volo.Abp.Domain.Entities;
+using Reconciliation;
 
 namespace Reconciliation;
 
-public class Transaction : BasicAggregateRoot<Guid>
+public class TransactionDto
 {
+    public Guid Id { get; set; }
     public Guid AccountId { get; set; }
-    public Account Account { get; set; } = null!;
     public decimal Amount { get; set; }
     public DateTime TransactionDate { get; set; }
-
 }

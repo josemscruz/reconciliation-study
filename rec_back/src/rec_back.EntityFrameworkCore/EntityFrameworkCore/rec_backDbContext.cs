@@ -14,6 +14,7 @@ using Volo.Abp.SettingManagement.EntityFrameworkCore;
 using Volo.Abp.OpenIddict.EntityFrameworkCore;
 using Volo.Abp.TenantManagement;
 using Volo.Abp.TenantManagement.EntityFrameworkCore;
+using Reconciliation;
 
 namespace rec_back.EntityFrameworkCore;
 
@@ -25,21 +26,14 @@ public class rec_backDbContext :
     ITenantManagementDbContext,
     IIdentityDbContext
 {
-    /* Add DbSet properties for your Aggregate Roots / Entities here. */
+    #region Entities for reconciliation domain
 
+    public DbSet<Account> Accounts { get; set; }
+    public DbSet<Transaction> Transactions { get; set; }
+
+    #endregion
 
     #region Entities from the modules
-
-    /* Notice: We only implemented IIdentityProDbContext and ISaasDbContext
-     * and replaced them for this DbContext. This allows you to perform JOIN
-     * queries for the entities of these modules over the repositories easily. You
-     * typically don't need that for other modules. But, if you need, you can
-     * implement the DbContext interface of the needed module and use ReplaceDbContext
-     * attribute just like IIdentityProDbContext and ISaasDbContext.
-     *
-     * More info: Replacing a DbContext of a module ensures that the related module
-     * uses this DbContext on runtime. Otherwise, it will use its own DbContext class.
-     */
 
     // Identity
     public DbSet<IdentityUser> Users { get; set; }
@@ -67,8 +61,6 @@ public class rec_backDbContext :
     {
         base.OnModelCreating(builder);
 
-        /* Include modules to your migration db context */
-
         builder.ConfigurePermissionManagement();
         builder.ConfigureSettingManagement();
         builder.ConfigureBackgroundJobs();
@@ -78,14 +70,18 @@ public class rec_backDbContext :
         builder.ConfigureOpenIddict();
         builder.ConfigureTenantManagement();
         builder.ConfigureBlobStoring();
-        
-        /* Configure your own tables/entities inside here */
 
-        //builder.Entity<YourEntity>(b =>
-        //{
-        //    b.ToTable(rec_backConsts.DbTablePrefix + "YourEntities", rec_backConsts.DbSchema);
-        //    b.ConfigureByConvention(); //auto configure for the base class props
-        //    //...
-        //});
+        builder.Entity<Account>(b =>
+        {
+            b.ToTable("Accounts");
+        });
+
+        builder.Entity<Transaction>(t =>
+        {
+            t.ToTable("Transactions");
+            t.HasOne(a => a.Account)
+                .WithMany(b => b.Transactions)
+                .HasForeignKey(a => a.AccountId);
+        });
     }
 }
