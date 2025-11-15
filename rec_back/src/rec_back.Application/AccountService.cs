@@ -25,7 +25,8 @@ public class AccountService : ApplicationService, IAccountService
             {
                 Id = account.Id,
                 AccountName = account.AccountName,
-                AccountNumber = account.AccountNumber
+                AccountNumber = account.AccountNumber,
+                Description = account.Description
             }
         ).ToList();
     }
@@ -36,7 +37,8 @@ public class AccountService : ApplicationService, IAccountService
             new Account
             {
                 AccountName = accountDto.AccountName,
-                AccountNumber = accountDto.AccountNumber
+                AccountNumber = accountDto.AccountNumber,
+                Description = accountDto.Description
             }
         );
 
@@ -44,7 +46,8 @@ public class AccountService : ApplicationService, IAccountService
         {
             Id = account.Id,
             AccountName = account.AccountName,
-            AccountNumber = account.AccountNumber
+            AccountNumber = account.AccountNumber,
+            Description = account.Description
         };
     }
 
