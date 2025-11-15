@@ -31,6 +31,20 @@ public class AccountService : ApplicationService, IAccountService
         ).ToList();
     }
 
+    public async Task<List<AccountDto>> GetInfoByAccountIdAsync(Guid accountId)
+    {
+        var accounts = await _accountRepository.GetListAsync(a => a.Id == accountId); ;
+        return accounts.Select(
+            account => new AccountDto
+            {
+                Id = account.Id,
+                AccountName = account.AccountName,
+                AccountNumber = account.AccountNumber,
+                Description = account.Description
+            }
+        ).ToList();
+    }
+
     public async Task<AccountDto> CreateAsync(AccountDto accountDto)
     {
         var account = await _accountRepository.InsertAsync(
