@@ -14,57 +14,52 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as HomeRouteImport } from './routes/home'
 
 const AccountListLazyRouteImport = createFileRoute('/accountList')()
-const AccountInfoAccountIdLazyRouteImport = createFileRoute(
-  '/accountInfo/$accountId',
-)()
+const AccountInfoLazyRouteImport = createFileRoute('/accountInfo')()
 
 const AccountListLazyRoute = AccountListLazyRouteImport.update({
   id: '/accountList',
   path: '/accountList',
   getParentRoute: () => rootRouteImport,
 } as any).lazy(() => import('./routes/accountList.lazy').then((d) => d.Route))
+const AccountInfoLazyRoute = AccountInfoLazyRouteImport.update({
+  id: '/accountInfo',
+  path: '/accountInfo',
+  getParentRoute: () => rootRouteImport,
+} as any).lazy(() => import('./routes/accountInfo.lazy').then((d) => d.Route))
 const HomeRoute = HomeRouteImport.update({
   id: '/home',
   path: '/home',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AccountInfoAccountIdLazyRoute =
-  AccountInfoAccountIdLazyRouteImport.update({
-    id: '/accountInfo/$accountId',
-    path: '/accountInfo/$accountId',
-    getParentRoute: () => rootRouteImport,
-  } as any).lazy(() =>
-    import('./routes/accountInfo/$accountId.lazy').then((d) => d.Route),
-  )
 
 export interface FileRoutesByFullPath {
   '/home': typeof HomeRoute
+  '/accountInfo': typeof AccountInfoLazyRoute
   '/accountList': typeof AccountListLazyRoute
-  '/accountInfo/$accountId': typeof AccountInfoAccountIdLazyRoute
 }
 export interface FileRoutesByTo {
   '/home': typeof HomeRoute
+  '/accountInfo': typeof AccountInfoLazyRoute
   '/accountList': typeof AccountListLazyRoute
-  '/accountInfo/$accountId': typeof AccountInfoAccountIdLazyRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/home': typeof HomeRoute
+  '/accountInfo': typeof AccountInfoLazyRoute
   '/accountList': typeof AccountListLazyRoute
-  '/accountInfo/$accountId': typeof AccountInfoAccountIdLazyRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/home' | '/accountList' | '/accountInfo/$accountId'
+  fullPaths: '/home' | '/accountInfo' | '/accountList'
   fileRoutesByTo: FileRoutesByTo
-  to: '/home' | '/accountList' | '/accountInfo/$accountId'
-  id: '__root__' | '/home' | '/accountList' | '/accountInfo/$accountId'
+  to: '/home' | '/accountInfo' | '/accountList'
+  id: '__root__' | '/home' | '/accountInfo' | '/accountList'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   HomeRoute: typeof HomeRoute
+  AccountInfoLazyRoute: typeof AccountInfoLazyRoute
   AccountListLazyRoute: typeof AccountListLazyRoute
-  AccountInfoAccountIdLazyRoute: typeof AccountInfoAccountIdLazyRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -76,6 +71,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AccountListLazyRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/accountInfo': {
+      id: '/accountInfo'
+      path: '/accountInfo'
+      fullPath: '/accountInfo'
+      preLoaderRoute: typeof AccountInfoLazyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/home': {
       id: '/home'
       path: '/home'
@@ -83,20 +85,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HomeRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/accountInfo/$accountId': {
-      id: '/accountInfo/$accountId'
-      path: '/accountInfo/$accountId'
-      fullPath: '/accountInfo/$accountId'
-      preLoaderRoute: typeof AccountInfoAccountIdLazyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   HomeRoute: HomeRoute,
+  AccountInfoLazyRoute: AccountInfoLazyRoute,
   AccountListLazyRoute: AccountListLazyRoute,
-  AccountInfoAccountIdLazyRoute: AccountInfoAccountIdLazyRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
