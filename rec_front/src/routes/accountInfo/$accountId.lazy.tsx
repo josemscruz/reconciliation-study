@@ -33,7 +33,7 @@ function AccountInfoPage() {
   });
 
   const { isLoading: transactionsLoading, data: transactionsData } = useQuery<Transaction[]>({
-    queryKey: ["transactions", 1],
+    queryKey: ["transactions"],
     queryFn: () => getTransactiondByAccountId(accountId),
   });
 

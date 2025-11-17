@@ -16,7 +16,7 @@ export const Route = createLazyFileRoute("/accountList")({
 
 export default function AccountList() {
   const { isLoading, data } = useQuery<Account[]>({
-    queryKey: ["accountList", 1],
+    queryKey: ["accountList"],
     queryFn: () => getAccountList(),
   });
 
