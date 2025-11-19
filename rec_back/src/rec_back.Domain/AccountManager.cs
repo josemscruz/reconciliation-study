@@ -44,4 +44,13 @@ public class AccountManager : DomainService
 
         return await _accountRepository.InsertAsync(account);
     }
+
+    public async Task<Account> UpdateAsync(Account account, string name, string number, string description)
+    {
+        if (!string.IsNullOrWhiteSpace(name)) account.AccountName = name;
+        if (!string.IsNullOrWhiteSpace(number)) account.AccountNumber = number;
+        if (!string.IsNullOrWhiteSpace(description)) account.Description = description;
+
+        return await _accountRepository.UpdateAsync(account);
+    }
 }

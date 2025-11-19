@@ -11,6 +11,8 @@ public interface IAccountService : IApplicationService
     Task<List<AccountDto>> GetListAsync();
     Task<AccountDto> GetAsync(Guid accountId);
     Task<AccountDto> CreateAsync(AccountDto input);
+
+    Task<AccountDto> UpdateAsync(Guid accountId, UpdateAccountDto input);
     Task DeleteAsync(Guid id);
 }
 

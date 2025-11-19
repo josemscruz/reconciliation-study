@@ -55,6 +55,21 @@ public class AccountService : ApplicationService, IAccountService
         };
     }
 
+    public async Task<AccountDto> UpdateAsync(Guid accountId, UpdateAccountDto input)
+    {
+        var account = await _accountManager.GetAsync(accountId);
+
+        var updated = await _accountManager.UpdateAsync(account, input.AccountName, input.AccountNumber, input.Description);
+
+        return new AccountDto
+        {
+            Id = account.Id,
+            AccountName = updated.AccountName,
+            AccountNumber = updated.AccountNumber,
+            Description = updated.Description
+        };
+    }
+
     public async Task DeleteAsync(Guid id)
     {
         await _accountManager.DeleteAsync(id);
