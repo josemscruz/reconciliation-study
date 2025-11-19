@@ -3,23 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Volo.Abp.Application.Services;
-using Volo.Abp.Domain.Repositories;
 using Reconciliation;
 
 namespace Reconciliation;
 
 public class AccountService : ApplicationService, IAccountService
 {
-    private readonly IRepository<Account, Guid> _accountRepository;
+    public readonly AccountManager _accountManager;
 
-    public AccountService(IRepository<Account, Guid> accountRepository)
+    public AccountService(AccountManager accountManager)
     {
-        _accountRepository = accountRepository;
+        _accountManager = accountManager;
     }
 
     public async Task<List<AccountDto>> GetListAsync()
     {
-        var accounts = await _accountRepository.GetListAsync();
+        var accounts = await _accountManager.GetListAsync();
         return accounts.Select(
             account => new AccountDto
             {
@@ -31,30 +30,21 @@ public class AccountService : ApplicationService, IAccountService
         ).ToList();
     }
 
-    public async Task<List<AccountDto>> GetInfoByAccountIdAsync(Guid accountId)
+    public async Task<AccountDto> GetAsync(Guid accountId)
     {
-        var accounts = await _accountRepository.GetListAsync(a => a.Id == accountId); ;
-        return accounts.Select(
-            account => new AccountDto
-            {
-                Id = account.Id,
-                AccountName = account.AccountName,
-                AccountNumber = account.AccountNumber,
-                Description = account.Description
-            }
-        ).ToList();
+        var account = await _accountManager.GetAsync(accountId);
+        return new AccountDto
+        {
+            Id = account.Id,
+            AccountName = account.AccountName,
+            AccountNumber = account.AccountNumber,
+            Description = account.Description
+        };
     }
 
     public async Task<AccountDto> CreateAsync(AccountDto accountDto)
     {
-        var account = await _accountRepository.InsertAsync(
-            new Account
-            {
-                AccountName = accountDto.AccountName,
-                AccountNumber = accountDto.AccountNumber,
-                Description = accountDto.Description
-            }
-        );
+        var account = await _accountManager.CreateAsync(accountDto.AccountName, accountDto.AccountNumber, accountDto.Description);
 
         return new AccountDto
         {
@@ -67,6 +57,6 @@ public class AccountService : ApplicationService, IAccountService
 
     public async Task DeleteAsync(Guid id)
     {
-        await _accountRepository.DeleteAsync(id);
+        await _accountManager.DeleteAsync(id);
     }
 }

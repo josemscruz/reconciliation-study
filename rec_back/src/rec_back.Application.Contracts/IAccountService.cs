@@ -9,7 +9,7 @@ namespace Reconciliation;
 public interface IAccountService : IApplicationService
 {
     Task<List<AccountDto>> GetListAsync();
-    Task<List<AccountDto>> GetInfoByAccountIdAsync(Guid accountId);
+    Task<AccountDto> GetAsync(Guid accountId);
     Task<AccountDto> CreateAsync(AccountDto input);
     Task DeleteAsync(Guid id);
 }
