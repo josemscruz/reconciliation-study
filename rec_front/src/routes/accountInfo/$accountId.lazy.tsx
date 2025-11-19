@@ -27,7 +27,7 @@ function AccountInfoPage() {
     from: "/accountInfo/$accountId",
   });
 
-  const { isLoading: accountLoading, data: accountData } = useQuery<Account[]>({
+  const { isLoading: accountLoading, data: accountData } = useQuery<Account>({
     queryKey: ["accountInfo", accountId],
     queryFn: () => getAccountInfo(accountId),
   });
@@ -41,7 +41,7 @@ function AccountInfoPage() {
     return <h2>Loading...</h2>;
   }
 
-  let account: Account = accountData[0];
+  let account: Account = accountData;
 
   return (
     <>
