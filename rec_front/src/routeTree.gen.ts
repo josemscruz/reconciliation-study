@@ -13,11 +13,19 @@ import { createFileRoute } from '@tanstack/react-router'
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as HomeRouteImport } from './routes/home'
 
+const NewAccountFormLazyRouteImport = createFileRoute('/newAccountForm')()
 const AccountListLazyRouteImport = createFileRoute('/accountList')()
 const AccountInfoAccountIdLazyRouteImport = createFileRoute(
   '/accountInfo/$accountId',
 )()
 
+const NewAccountFormLazyRoute = NewAccountFormLazyRouteImport.update({
+  id: '/newAccountForm',
+  path: '/newAccountForm',
+  getParentRoute: () => rootRouteImport,
+} as any).lazy(() =>
+  import('./routes/newAccountForm.lazy').then((d) => d.Route),
+)
 const AccountListLazyRoute = AccountListLazyRouteImport.update({
   id: '/accountList',
   path: '/accountList',
@@ -40,35 +48,55 @@ const AccountInfoAccountIdLazyRoute =
 export interface FileRoutesByFullPath {
   '/home': typeof HomeRoute
   '/accountList': typeof AccountListLazyRoute
+  '/newAccountForm': typeof NewAccountFormLazyRoute
   '/accountInfo/$accountId': typeof AccountInfoAccountIdLazyRoute
 }
 export interface FileRoutesByTo {
   '/home': typeof HomeRoute
   '/accountList': typeof AccountListLazyRoute
+  '/newAccountForm': typeof NewAccountFormLazyRoute
   '/accountInfo/$accountId': typeof AccountInfoAccountIdLazyRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/home': typeof HomeRoute
   '/accountList': typeof AccountListLazyRoute
+  '/newAccountForm': typeof NewAccountFormLazyRoute
   '/accountInfo/$accountId': typeof AccountInfoAccountIdLazyRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/home' | '/accountList' | '/accountInfo/$accountId'
+  fullPaths:
+    | '/home'
+    | '/accountList'
+    | '/newAccountForm'
+    | '/accountInfo/$accountId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/home' | '/accountList' | '/accountInfo/$accountId'
-  id: '__root__' | '/home' | '/accountList' | '/accountInfo/$accountId'
+  to: '/home' | '/accountList' | '/newAccountForm' | '/accountInfo/$accountId'
+  id:
+    | '__root__'
+    | '/home'
+    | '/accountList'
+    | '/newAccountForm'
+    | '/accountInfo/$accountId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   HomeRoute: typeof HomeRoute
   AccountListLazyRoute: typeof AccountListLazyRoute
+  NewAccountFormLazyRoute: typeof NewAccountFormLazyRoute
   AccountInfoAccountIdLazyRoute: typeof AccountInfoAccountIdLazyRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/newAccountForm': {
+      id: '/newAccountForm'
+      path: '/newAccountForm'
+      fullPath: '/newAccountForm'
+      preLoaderRoute: typeof NewAccountFormLazyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/accountList': {
       id: '/accountList'
       path: '/accountList'
@@ -96,6 +124,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   HomeRoute: HomeRoute,
   AccountListLazyRoute: AccountListLazyRoute,
+  NewAccountFormLazyRoute: NewAccountFormLazyRoute,
   AccountInfoAccountIdLazyRoute: AccountInfoAccountIdLazyRoute,
 }
 export const routeTree = rootRouteImport
