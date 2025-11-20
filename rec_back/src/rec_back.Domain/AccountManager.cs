@@ -16,7 +16,7 @@ public class AccountManager : DomainService
         _accountRepository = accountRepository;
     }
 
-    public async Task<Account> GetAsync(Guid id)
+    public async Task<Account> GetAccountAsync(Guid id)
     {
         return await _accountRepository.GetAsync(id);
     }

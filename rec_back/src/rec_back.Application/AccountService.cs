@@ -30,9 +30,9 @@ public class AccountService : ApplicationService, IAccountService
         ).ToList();
     }
 
-    public async Task<AccountDto> GetAsync(Guid accountId)
+    public async Task<AccountDto> GetAccountAsync(Guid accountId)
     {
-        var account = await _accountManager.GetAsync(accountId);
+        var account = await _accountManager.GetAccountAsync(accountId);
         return new AccountDto
         {
             Id = account.Id,
@@ -57,7 +57,7 @@ public class AccountService : ApplicationService, IAccountService
 
     public async Task<AccountDto> UpdateAsync(Guid accountId, UpdateAccountDto input)
     {
-        var account = await _accountManager.GetAsync(accountId);
+        var account = await _accountManager.GetAccountAsync(accountId);
 
         var updated = await _accountManager.UpdateAsync(account, input.AccountName, input.AccountNumber, input.Description);
 
