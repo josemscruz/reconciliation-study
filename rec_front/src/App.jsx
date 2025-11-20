@@ -17,9 +17,4 @@ const App = () => {
   );
 };
 
-const element = document.getElementById("root");
-if (!element) {
-  throw new Error("Something went wrong.");
-}
-const root: HTMLElement = element;
-root ? createRoot(root).render(<App />) : <>Something went wrong.</>;
+createRoot(document.getElementById("root")).render(<App />);
