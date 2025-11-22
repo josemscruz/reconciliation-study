@@ -1,4 +1,4 @@
-import "../tw.css";
+import "../index.css";
 import { createLazyFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { getAccountList } from "../api/accountsController";

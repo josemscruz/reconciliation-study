@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import "../tw.css";
+import "../index.css";
 
 export const Route = createFileRoute("/home")({
   component: RouteComponent,

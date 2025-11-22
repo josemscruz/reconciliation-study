@@ -1,4 +1,4 @@
-import "./tw.css";
+import "./index.css";
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 
