@@ -7,7 +7,7 @@ interface CreateButtonProps {
 }
 
 export default function CreateButton({ name }: CreateButtonProps) {
-  const onClickRoute: string = "/create" + name;
+  const onClickRoute: string = `/new${name}Form`;
   const navigate = useNavigate();
   return (
     <Button onClick={() => navigate({ to: `${onClickRoute}` })} className="cursor-pointer">

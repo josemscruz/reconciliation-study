@@ -1,38 +1,42 @@
+import {
+  NavigationMenu,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+} from "@/components/ui/navigation-menu";
 import "./index.css";
-import { Link } from "@tanstack/react-router";
+import { Link, useRouterState } from "@tanstack/react-router";
 import { useState } from "react";
 
 export default function NavBar() {
-  // JOSÉ CRUZ: I KNOW THIS IS NOT HOW YOU MAKE A NAV
+  const homePath = "/";
+  const accountListPath = "/accountList";
+  const state = useRouterState();
+  const pathName = state.location.pathname;
 
-  const [isActiveHome, setIsActiveHome] = useState(true);
-  const [isActiveAccounts, setIsActiveAccounts] = useState(false);
   return (
-    <>
-      <nav className="bg-gray-700 p-4">
-        <div className="container flex">
-          <Link
-            to="/home"
-            className={`${isActiveHome ? "text-white" : "text-gray-900"} text-lg font-bold mr-7`}
-            onClick={() => {
-              setIsActiveAccounts(false);
-              setIsActiveHome(true);
-            }}
-          >
-            Home
-          </Link>
-          <Link
-            to="/accountList"
-            className={`${isActiveAccounts ? "text-white" : "text-gray-900"} text-lg font-bold`}
-            onClick={() => {
-              setIsActiveAccounts(true);
-              setIsActiveHome(false);
-            }}
-          >
-            Accounts
-          </Link>
-        </div>
-      </nav>
-    </>
+    <div className="dark w-full bg-background/80 border-b border-border py-5">
+      <NavigationMenu className="max-w-xl mx-auto px-4">
+        <NavigationMenuList>
+          <NavigationMenuItem>
+            <NavigationMenuLink
+              className={`${pathName == homePath ? "text-foreground" : "text-background"} text-xl ml-3`}
+              asChild
+            >
+              <Link to={homePath}>Home</Link>
+            </NavigationMenuLink>
+          </NavigationMenuItem>
+          <NavigationMenuItem>
+            <NavigationMenuLink
+              className={`${pathName == accountListPath ? "text-foreground" : "text-background"} text-xl ml-3`}
+              asChild
+            >
+              <Link to={accountListPath}>Accounts</Link>
+            </NavigationMenuLink>
+          </NavigationMenuItem>
+        </NavigationMenuList>
+      </NavigationMenu>
+    </div>
   );
 }
