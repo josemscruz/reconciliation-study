@@ -30,6 +30,20 @@ public class TransactionService : ApplicationService, ITransactionService
         ).ToList();
     }
 
+    public async Task<List<TransactionDto>> GetListByAccountIdAsync(Guid accountId)
+    {
+        var transactions = await _transactionManager.GetListByAccountIdAsync(accountId);
+        return transactions.Select(
+            transaction => new TransactionDto
+            {
+                Id = transaction.Id,
+                AccountId = transaction.AccountId,
+                Amount = transaction.Amount,
+                TransactionDate = transaction.TransactionDate
+            }
+        ).ToList();
+    }
+
     public async Task<TransactionDto> GetTransactionAsync(Guid transactionId)
     {
         var transaction = await _transactionManager.GetTransactionAsync(transactionId);

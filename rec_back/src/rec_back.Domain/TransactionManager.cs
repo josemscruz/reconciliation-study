@@ -25,6 +25,10 @@ public class TransactionManager : DomainService
     {
         return await _transactionManager.GetListAsync();
     }
+    public async Task<List<Transaction>> GetListByAccountIdAsync(Guid accountId)
+    {
+        return await _transactionManager.GetListAsync(t => t.AccountId == accountId);
+    }
 
     public async Task DeleteAsync(Guid id)
     {
