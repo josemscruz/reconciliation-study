@@ -3,7 +3,6 @@ import {
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
-  NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 import "./index.css";
 import { Link, useRouterState } from "@tanstack/react-router";

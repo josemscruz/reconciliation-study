@@ -4,10 +4,10 @@ import NavBar from "../NavBar";
 export const Route = createRootRoute({
   component: () => {
     return (
-      <>
+      <div>
         <NavBar />
         <Outlet />
-      </>
+      </div>
     );
   },
 });

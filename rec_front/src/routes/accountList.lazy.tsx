@@ -2,14 +2,15 @@ import "../index.css";
 import { createLazyFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { getAccountList } from "../api/accountsController";
-import CreateButton from "../CreateButton";
+import NavigateButton from "../NavigateButton";
 import { Account } from "../types/accounts";
+import { ItemTable } from "../ItemTable";
 
 export const Route = createLazyFileRoute("/accountList")({
   component: AccountList,
 });
 
-export default function AccountList() {
+function AccountList() {
   const { isLoading, data } = useQuery<Account[]>({
     queryKey: ["accountList"],
     queryFn: () => getAccountList(),
@@ -19,41 +20,22 @@ export default function AccountList() {
     return <h2>Loading...</h2>;
   }
 
+  if (!data) {
+    return <h2>Something went wrong. Try again later.</h2>;
+  }
+
+  const accountsColumns = [
+    { key: "accountNumber", text: "Number" },
+    { key: "accountName", text: "Name" },
+    { key: "description", text: "Description" },
+  ];
+
   return (
     <>
-      <div className="px-2 py-2">
-        <CreateButton name="Account" />
+      <div className="px-2 py-5">
+        <NavigateButton path="/newAccountForm" text="Create Account" />
       </div>
-      <div className="px-2">
-        <table className="min-w-full border border-gray-300">
-          <thead className="bg-gray-500 text-left">
-            <tr>
-              <th className="px-4 py-2 border border-gray-300 text-white">Number</th>
-              <th className="px-4 py-2 border border-gray-300 text-white">Name</th>
-              <th className="px-4 py-2 border border-gray-300 text-white">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {data?.map((account: Account) => {
-              return (
-                <tr key={`account${account.accountNumber}`} className="hover:bg-blue-50">
-                  <td className="px-4 py-2 border border-gray-300">{account.accountNumber}</td>
-                  <td className="px-4 py-2 border border-gray-300">{account.accountName}</td>
-                  <td className="px-4 py-2 border border-gray-300">
-                    <Link
-                      className="text-blue-500"
-                      params={{ accountId: account.id }}
-                      to="/accountInfo/$accountId"
-                    >
-                      View Account
-                    </Link>
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      </div>
+      <ItemTable columns={accountsColumns} data={data}></ItemTable>
     </>
   );
 }
