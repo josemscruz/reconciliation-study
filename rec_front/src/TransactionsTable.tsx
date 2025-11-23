@@ -7,9 +7,12 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-import { ItemTableProps } from "../src/types/table";
+import { ItemTableProps } from "./types/table";
 
-export function ItemTable<T extends Record<string, any>>({ columns, data }: ItemTableProps<T>) {
+export function TransactionsTable<T extends Record<string, any>>({
+  columns,
+  data,
+}: ItemTableProps<T>) {
   return (
     <Table className="border">
       <TableHeader>

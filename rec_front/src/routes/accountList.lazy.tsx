@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getAccountList } from "../api/accountsController";
 import { NavigateButton } from "../NavigateButton";
 import { Account } from "../types/accounts";
-import { ItemTable } from "../ItemTable";
+import { AccountsTable } from "../AccountsTable";
 import { useState } from "react";
 
 export const Route = createLazyFileRoute("/accountList")({
@@ -16,8 +16,6 @@ function AccountList() {
     queryKey: ["accountList"],
     queryFn: () => getAccountList(),
   });
-
-  const [accountPath, setAccountPath] = useState("/");
 
   if (isLoading) {
     return <h2>Loading...</h2>;
@@ -32,13 +30,12 @@ function AccountList() {
     { key: "accountName", text: "Name" },
     { key: "description", text: "Description" },
   ];
-
   return (
     <>
       <div className="py-5">
         <NavigateButton path="/newAccountForm" text="Create Account" />
       </div>
-      <ItemTable columns={accountsColumns} data={data}></ItemTable>
+      <AccountsTable columns={accountsColumns} data={data}></AccountsTable>
     </>
   );
 }

@@ -3,20 +3,18 @@ import { createLazyFileRoute, useParams } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { getAccountInfo } from "../../api/accountsController";
 import { getTransactiondByAccountId } from "../../api/transactionsController";
-
-interface Account {
-  accountName: string;
-  accountNumber: string;
-  description: string;
-  id: string;
-}
-
-interface Transaction {
-  id: string;
-  accountId: string;
-  amount: number;
-  transactionDate: Date;
-}
+import { Account } from "../../types/accounts";
+import { Transaction } from "../../types/transactions";
+import { TransactionsTable } from "../../TransactionsTable";
+import {
+  Card,
+  CardAction,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
 export const Route = createLazyFileRoute(`/accountInfo/$accountId`)({
   component: AccountInfoPage,
@@ -43,41 +41,24 @@ function AccountInfoPage() {
 
   let account: Account = accountData;
 
+  const accountsColumns = [
+    { key: "id", text: "System ID" },
+    { key: "amount", text: "Amount" },
+    { key: "transactionDate", text: "Transaction Date" },
+  ];
+
   return (
     <>
-      <div className="bg-white rounded-lg shadow-md border border-gray-200 p-4 m-4">
-        <div>
-          <h1 className="text-2xl font-semibold mb-2 text-gray-800">Account Name</h1>
-          <p className="text-gray-600">{account.accountName}</p>
-        </div>
-        <div>
-          <h1 className="text-2xl font-semibold mb-2 text-gray-800">Description</h1>
-          <p className="text-gray-600">{account.description}</p>
-        </div>
+      <div className="px-2 py-5">
+        <Card>
+          <CardHeader>
+            <CardTitle>Account Name</CardTitle>
+            <CardDescription>{account.accountName}</CardDescription>
+          </CardHeader>
+        </Card>
       </div>
       <div>
-        <table className="min-w-full border border-gray-300 mt-5 ">
-          <thead className="bg-gray-500 text-left">
-            <tr>
-              <th className="px-4 py-2 border border-gray-300 text-white">Id</th>
-              <th className="px-4 py-2 border border-gray-300 text-white">Amount</th>
-              <th className="px-4 py-2 border border-gray-300 text-white">Transaction Date</th>
-            </tr>
-          </thead>
-          <tbody>
-            {transactionsData.map((transaction: Transaction) => {
-              return (
-                <tr key={`transactions${transaction.id}`} className="hover:bg-blue-50">
-                  <td className="px-4 py-2 border border-gray-300">{transaction.id}</td>
-                  <td className="px-4 py-2 border border-gray-300">{transaction.amount}</td>
-                  <td className="px-4 py-2 border border-gray-300">
-                    {new Date(transaction.transactionDate).toLocaleDateString()}
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+        <TransactionsTable columns={accountsColumns} data={transactionsData}></TransactionsTable>
       </div>
     </>
   );
