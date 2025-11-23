@@ -6,15 +6,10 @@ import { getTransactiondByAccountId } from "../../api/transactionsController";
 import { Account } from "../../types/accounts";
 import { Transaction } from "../../types/transactions";
 import { TransactionsTable } from "../../TransactionsTable";
-import {
-  Card,
-  CardAction,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { PencilIcon } from "@/components/ui/icons/akar-icons-pencil";
+import { TrashCanIcon } from "@/components/ui/icons/akar-icons-trash-can";
 
 export const Route = createLazyFileRoute(`/accountInfo/$accountId`)({
   component: AccountInfoPage,
@@ -47,6 +42,14 @@ function AccountInfoPage() {
     { key: "transactionDate", text: "Transaction Date" },
   ];
 
+  const handleAccountEdit = () => {
+    console.log("Edit");
+  };
+
+  const handleAccountDelete = () => {
+    console.log("Delete");
+  };
+
   return (
     <>
       <div className="px-2 py-5">
@@ -54,7 +57,22 @@ function AccountInfoPage() {
           <CardHeader>
             <CardTitle>Account Name</CardTitle>
             <CardDescription>{account.accountName}</CardDescription>
+            <CardTitle>Description</CardTitle>
+            <CardDescription>{account.description}</CardDescription>
           </CardHeader>
+          <CardFooter>
+            <Button onClick={handleAccountEdit} className="cursor-pointer mr-2">
+              <PencilIcon></PencilIcon>
+              Edit
+            </Button>
+            <Button
+              onClick={handleAccountDelete}
+              className="cursor-pointer bg-red-600 hover:bg-red-400"
+            >
+              <TrashCanIcon></TrashCanIcon>
+              Delete
+            </Button>
+          </CardFooter>
         </Card>
       </div>
       <div>
