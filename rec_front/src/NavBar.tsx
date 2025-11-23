@@ -6,7 +6,6 @@ import {
 } from "@/components/ui/navigation-menu";
 import "./index.css";
 import { Link, useRouterState } from "@tanstack/react-router";
-import { useState } from "react";
 
 export default function NavBar() {
   const homePath = "/";
@@ -15,7 +14,7 @@ export default function NavBar() {
   const pathName = state.location.pathname;
 
   return (
-    <div className="dark w-full bg-background/80 border-b border-border py-5">
+    <div className="dark w-full bg-background/80 border-b border-border py-4">
       <NavigationMenu className="max-w-xl mx-auto px-4">
         <NavigationMenuList>
           <NavigationMenuItem>

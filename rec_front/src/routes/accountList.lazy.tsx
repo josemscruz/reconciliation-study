@@ -2,9 +2,10 @@ import "../index.css";
 import { createLazyFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { getAccountList } from "../api/accountsController";
-import NavigateButton from "../NavigateButton";
+import { NavigateButton } from "../NavigateButton";
 import { Account } from "../types/accounts";
 import { ItemTable } from "../ItemTable";
+import { useState } from "react";
 
 export const Route = createLazyFileRoute("/accountList")({
   component: AccountList,
@@ -15,6 +16,8 @@ function AccountList() {
     queryKey: ["accountList"],
     queryFn: () => getAccountList(),
   });
+
+  const [accountPath, setAccountPath] = useState("/");
 
   if (isLoading) {
     return <h2>Loading...</h2>;
@@ -32,7 +35,7 @@ function AccountList() {
 
   return (
     <>
-      <div className="px-2 py-5">
+      <div className="py-5">
         <NavigateButton path="/newAccountForm" text="Create Account" />
       </div>
       <ItemTable columns={accountsColumns} data={data}></ItemTable>

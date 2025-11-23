@@ -36,7 +36,7 @@ function RouteComponent() {
 
   return (
     <div className="px-2 py-2">
-      <h1 className="text-3xl text-blue-500 pt-3">Create a new account</h1>
+      <h1 className="text-3xl text-gray-950 pt-3">Create a new account</h1>
       <div className="pt-3">
         <label htmlFor="accountNameInput" className="block text-sm font-medium text-gray-700">
           Account Name
@@ -76,7 +76,7 @@ function RouteComponent() {
       <div className="py-5">
         <button
           onClick={handleClick}
-          className="border px-5 py-1 rounded bg-blue-600 text-white hover:bg-blue-700 cursor-pointer transition"
+          className="border px-5 py-1 rounded bg-gray-950 text-white hover:bg-gray-800 cursor-pointer transition"
         >
           Create
         </button>
