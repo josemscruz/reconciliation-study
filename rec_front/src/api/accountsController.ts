@@ -27,3 +27,25 @@ export async function createAccount(account: Account) {
 
   return true;
 }
+
+export async function updateAccountInfo(accountName: string, description: string, id: string) {
+  const method = "PUT";
+  const updatedAccount: Account = {
+    accountName,
+    description,
+    id,
+  };
+  const body = JSON.stringify(updatedAccount);
+
+  const response: Response = await fetch(`http://localhost:44317/api/app/account?accountId=${id}`, {
+    method: method,
+    headers: { "Content-Type": "application/json" },
+    body: body,
+  });
+
+  if (!response.ok) {
+    throw new Error("Something went wrong while posting.");
+  }
+
+  return true;
+}

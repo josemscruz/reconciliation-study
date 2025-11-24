@@ -8,8 +8,8 @@ import { Transaction } from "../../types/transactions";
 import { TransactionsTable } from "../../TransactionsTable";
 import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { PencilIcon } from "@/components/ui/icons/akar-icons-pencil";
 import { TrashCanIcon } from "@/components/ui/icons/akar-icons-trash-can";
+import { EditAccountDialogAndButton } from "@/EditAccountDialogAndButton";
 
 export const Route = createLazyFileRoute(`/accountInfo/$accountId`)({
   component: AccountInfoPage,
@@ -42,10 +42,6 @@ function AccountInfoPage() {
     { key: "transactionDate", text: "Transaction Date" },
   ];
 
-  const handleAccountEdit = () => {
-    console.log("Edit");
-  };
-
   const handleAccountDelete = () => {
     console.log("Delete");
   };
@@ -61,14 +57,8 @@ function AccountInfoPage() {
             <CardDescription>{account.description}</CardDescription>
           </CardHeader>
           <CardFooter>
-            <Button onClick={handleAccountEdit} className="cursor-pointer mr-2">
-              <PencilIcon></PencilIcon>
-              Edit
-            </Button>
-            <Button
-              onClick={handleAccountDelete}
-              className="cursor-pointer bg-red-600 hover:bg-red-400"
-            >
+            <EditAccountDialogAndButton account={account}></EditAccountDialogAndButton>
+            <Button onClick={handleAccountDelete} className="cursor-pointer" variant="secondary">
               <TrashCanIcon></TrashCanIcon>
               Delete
             </Button>

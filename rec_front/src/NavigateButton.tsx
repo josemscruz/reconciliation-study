@@ -1,7 +1,6 @@
 import "./index.css";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "@tanstack/react-router";
-import { type } from "os";
 
 interface NavigateButtonProps {
   path: string;

@@ -5,7 +5,6 @@ import { getAccountList } from "../api/accountsController";
 import { NavigateButton } from "../NavigateButton";
 import { Account } from "../types/accounts";
 import { AccountsTable } from "../AccountsTable";
-import { useState } from "react";
 
 export const Route = createLazyFileRoute("/accountList")({
   component: AccountList,
