@@ -22,7 +22,7 @@ export async function createAccount(account: Account) {
   });
 
   if (!response.ok) {
-    throw new Error("Something went wrong while posting.");
+    throw new Error("Something went wrong while creating account.");
   }
 
   return true;
@@ -44,7 +44,22 @@ export async function updateAccountInfo(accountName: string, description: string
   });
 
   if (!response.ok) {
-    throw new Error("Something went wrong while posting.");
+    throw new Error("Something went wrong while updating account.");
+  }
+
+  return true;
+}
+
+export async function deleteAccount(id: string) {
+  const method = "DELETE";
+
+  const response: Response = await fetch(`http://localhost:44317/api/app/account/${id}`, {
+    method: method,
+    headers: { "Content-Type": "application/json" },
+  });
+
+  if (!response.ok) {
+    throw new Error("Something went wrong while deleting account.");
   }
 
   return true;

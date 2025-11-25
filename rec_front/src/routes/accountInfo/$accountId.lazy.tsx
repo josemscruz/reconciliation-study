@@ -10,6 +10,7 @@ import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from "@/comp
 import { Button } from "@/components/ui/button";
 import { TrashCanIcon } from "@/components/ui/icons/akar-icons-trash-can";
 import { EditAccountDialogAndButton } from "@/EditAccountDialogAndButton";
+import { DeleteAccountDialogAndButton } from "@/DeleteAccountDialogAndButton";
 
 export const Route = createLazyFileRoute(`/accountInfo/$accountId`)({
   component: AccountInfoPage,
@@ -57,16 +58,13 @@ function AccountInfoPage() {
             <CardDescription>{account.description}</CardDescription>
           </CardHeader>
           <CardFooter>
-            <EditAccountDialogAndButton account={account}></EditAccountDialogAndButton>
-            <Button onClick={handleAccountDelete} className="cursor-pointer" variant="secondary">
-              <TrashCanIcon></TrashCanIcon>
-              Delete
-            </Button>
+            <EditAccountDialogAndButton account={account} />
+            <DeleteAccountDialogAndButton account={account} />
           </CardFooter>
         </Card>
       </div>
       <div>
-        <TransactionsTable columns={accountsColumns} data={transactionsData}></TransactionsTable>
+        <TransactionsTable columns={accountsColumns} data={transactionsData} />
       </div>
     </>
   );

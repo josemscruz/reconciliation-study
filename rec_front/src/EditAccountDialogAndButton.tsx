@@ -47,7 +47,7 @@ export function EditAccountDialogAndButton({ account }: DialogProps) {
           <div className="grid gap-3">
             <Label htmlFor="accountName-input">Account Name</Label>
             <Input
-              id="accountName"
+              id="accountName-input"
               value={accountName}
               onChange={(e) => setAccountName(e.target.value)}
             />
