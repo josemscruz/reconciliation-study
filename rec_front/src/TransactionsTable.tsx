@@ -6,13 +6,11 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-
 import { ItemTableProps } from "./types/table";
+import { EditTransactionDialogAndButton } from "./EditTransactionDialogAndButton";
+import { Transaction } from "./types/transactions";
 
-export function TransactionsTable<T extends Record<string, any>>({
-  columns,
-  data,
-}: ItemTableProps<T>) {
+export function TransactionsTable({ columns, data }: ItemTableProps<Transaction>) {
   return (
     <Table className="border">
       <TableHeader>
@@ -20,6 +18,7 @@ export function TransactionsTable<T extends Record<string, any>>({
           {columns.map((col) => (
             <TableHead key={col.key}>{col.text}</TableHead>
           ))}
+          <TableHead>Edit</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -29,6 +28,9 @@ export function TransactionsTable<T extends Record<string, any>>({
               const value = row[col.key];
               return <TableCell key={String(col.key)}>{value}</TableCell>;
             })}
+            <TableCell>
+              <EditTransactionDialogAndButton transaction={row} />
+            </TableCell>
           </TableRow>
         ))}
       </TableBody>
