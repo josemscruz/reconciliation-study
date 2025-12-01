@@ -15,21 +15,19 @@ import { Input } from "@/components/ui/input";
 import { Transaction } from "./types/transactions";
 import { useState } from "react";
 import { MoreVerticalIcon } from "./components/ui/icons/akar-icons-more-vertical";
+import { updateTransactionInfo } from "./api/transactionsController";
 
 interface DialogProps {
   transaction: Transaction;
 }
 
 export function EditTransactionDialogAndButton({ transaction }: DialogProps) {
-  //const [accountName, setAccountName] = useState(transaction);
-  //const [description, setDescription] = useState(account.description);
+  const [amount, setAmount] = useState(transaction.amount);
 
-  // async function handleSubmit(accountName: string, description: string, id: string) {
-  //   await updateAccountInfo(accountName, description, id);
-  //   window.location.reload();
-  // }
-
-  console.log(transaction);
+  async function handleSubmit(amount: number) {
+    await updateTransactionInfo(transaction.id, amount);
+    window.location.reload();
+  }
 
   return (
     <Dialog>
@@ -45,19 +43,12 @@ export function EditTransactionDialogAndButton({ transaction }: DialogProps) {
         </DialogHeader>
         <div className="grid gap-4">
           <div className="grid gap-3">
-            <Label htmlFor="accountName-input">Account Name</Label>
+            <Label htmlFor="accountName-input">Amount</Label>
             <Input
+              type="number"
               id="accountName-input"
-              //value={accountName}
-              //onChange={(e) => setAccountName(e.target.value)}
-            />
-          </div>
-          <div className="grid gap-3">
-            <Label htmlFor="accountDescription-input">Description</Label>
-            <Input
-              id="accountDescription-input"
-              //value={description}
-              //onChange={(e) => setDescription(e.target.value)}
+              value={amount}
+              onChange={(e) => setAmount(Number(e.target.value))}
             />
           </div>
         </div>
@@ -68,10 +59,7 @@ export function EditTransactionDialogAndButton({ transaction }: DialogProps) {
             </Button>
           </DialogClose>
           <DialogClose asChild>
-            <Button
-              className="cursor-pointer mr-2"
-              //onClick={() => handleSubmit(accountName, description, account.id!)}
-            >
+            <Button className="cursor-pointer mr-2" onClick={() => handleSubmit(amount)}>
               Save
             </Button>
           </DialogClose>

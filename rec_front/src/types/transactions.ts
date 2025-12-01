@@ -1,6 +1,6 @@
 export interface Transaction {
   id: string;
-  accountId: string;
+  accountId?: string;
   amount: number;
-  transactionDate: Date;
+  transactionDate?: Date;
 }

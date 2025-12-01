@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/table";
 import { ItemTableProps } from "./types/table";
 import { EditTransactionDialogAndButton } from "./EditTransactionDialogAndButton";
+import { DeleteTransactionDialogAndButton } from "./DeleteTransactionDialogAndButton";
 import { Transaction } from "./types/transactions";
 
 export function TransactionsTable({ columns, data }: ItemTableProps<Transaction>) {
@@ -18,7 +19,7 @@ export function TransactionsTable({ columns, data }: ItemTableProps<Transaction>
           {columns.map((col) => (
             <TableHead key={col.key}>{col.text}</TableHead>
           ))}
-          <TableHead>Edit</TableHead>
+          <TableHead>Actions</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -30,6 +31,7 @@ export function TransactionsTable({ columns, data }: ItemTableProps<Transaction>
             })}
             <TableCell>
               <EditTransactionDialogAndButton transaction={row} />
+              <DeleteTransactionDialogAndButton transaction={row} />
             </TableCell>
           </TableRow>
         ))}
